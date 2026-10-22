@@ -1,0 +1,19 @@
+name: Patched Node compatibility
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  frontend-image:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build frontend on patched Node
+        run: docker build --pull -f bestanden/frontend/Dockerfile bestanden/frontend
