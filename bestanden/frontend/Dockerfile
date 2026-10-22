@@ -1,11 +1,13 @@
-FROM node
+FROM node:22.23.4
 
-COPY package.json /
+WORKDIR /app
+
+COPY package.json ./
 
 RUN npm install
 
-COPY . /
+COPY . ./
 
-RUN npm run build
+RUN NODE_OPTIONS=--openssl-legacy-provider npm run build
 
 CMD ["/bin/bash", "-c", "npm run start"]
